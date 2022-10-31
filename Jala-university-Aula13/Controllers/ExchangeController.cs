@@ -1,3 +1,4 @@
+using Jala_university_Aula13.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Jala_university_Aula13.Controllers;
@@ -15,20 +16,20 @@ public class ExchangeController : Controller
     [HttpGet]
     public IActionResult GetAvailableMoney()
     {
-        return Ok(_walletService.Balance);
+        return Ok(_walletService.GetAvailableMoneyService());
     }
 
     [HttpPost]
     public ActionResult ExchangeMoney(string money, decimal amount)
     {
         var result = _walletService.ExchangeMoney(money, amount);
-        return StatusCode(200);
+        return Ok(result);
     }
 
     [HttpPost]
     public IActionResult AddMoneyToWallet(decimal amount)
     {
-        _walletService.AddToBalance(amount);
+        _walletService.AddMoneyToWalletService(amount);
         return Ok();
     }
 
